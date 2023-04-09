@@ -1,0 +1,22 @@
+name: run
+
+on: workflow_dispatch
+
+jobs:
+
+  run-ubuntu:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Install dependencies
+      run: |
+        sudo apt-get install liblua5.4-dev lua-socket
+    - uses: actions/checkout@v3
+    - name: Build
+      run: ./build.sh
+    - name: Run
+      run: ./hello-lua
+    - name: LDD
+      run: ldd ./hello-lua
+
